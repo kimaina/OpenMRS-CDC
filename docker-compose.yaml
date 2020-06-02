@@ -1,0 +1,46 @@
+version: '2.1'
+services:
+  mysql:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "3306:3306"
+    container_name: mysql
+    environment:
+      - MYSQL_DATABASE=openmrs
+      - MYSQL_ROOT_PASSWORD=debezium
+      - MYSQL_USER=mysqluser
+      - MYSQL_PASSWORD=mysqlpw
+      - MYSQL_ROOT_HOST=%    # Allow docker containers to connect to mysql
+    volumes:
+      - ./mysql.cnf:/etc/mysql/conf.d/custom.cnf
+      - ./dbdump:/docker-entrypoint-initdb.d
+      - ./data:/var/lib/mysql
+
+  openmrs:
+    restart: "always"
+    image: openmrs/openmrs-reference-application-distro:2.10.0
+    container_name: openmrs
+    depends_on:
+      - mysql
+    ports:
+      - "8099:8080"
+    environment:
+      DB_DATABASE: 'openmrs'
+      DB_HOST: mysql
+      DB_USERNAME: 'mysqluser'
+      DB_PASSWORD: 'mysqlpw'
+      #DB_CREATE_TABLES: 'true'
+      #DB_AUTO_UPDATE: 'true'
+      #MODULE_WEB_ADMIN: 'true'
+
+  dbz-camel:
+    image: camel-mysql-dbz/dbz-camel:${DEBEZIUM_VERSION}
+    container_name: cdc-pipeline
+    build:
+      context: dbz-camel
+    depends_on:
+     - openmrs
+    environment:
+     - JAVA_MAIN_CLASS=io.debezium.examples.camel.pipeline.Runner
+     - JAVA_OPTIONS=-Ddatabase.hostname=mysql -Ddatabase.port=3306 -Ddatabase.user=root -Ddatabase.password=debezium -Ddatabase.dbname=mysql -Ddatabase.schema=openmrs
