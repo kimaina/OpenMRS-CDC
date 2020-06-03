@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>io.debezium.examples.camel</groupId>
+        <groupId>org.openmrs.cdc</groupId>
         <artifactId>component-parent</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -90,7 +90,7 @@
                             <value>${smtp.port}</value>
                         </systemProperty>
                     </systemProperties>
-                    <mainClass>io.debezium.examples.camel.pipeline.Runner</mainClass>
+                    <mainClass>org.openmrs.cdc.pipeline.Runner</mainClass>
                 </configuration>
             </plugin>
             <plugin>
