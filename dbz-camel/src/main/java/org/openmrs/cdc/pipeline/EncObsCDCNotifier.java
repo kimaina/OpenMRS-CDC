@@ -39,17 +39,17 @@ public class EncObsCDCNotifier extends RouteBuilder {
 
         from("debezium-mysql:{{database.hostname}}?"
                 + "databaseHostname={{database.hostname}}"
-                + "&databaseServerId=77" // TODO: make this config-able
+                + "&databaseServerId={{database.serverId}}"
                 + "&databasePort={{database.port}}"
                 + "&databaseUser={{database.user}}"
                 + "&databasePassword={{database.password}}"
-                + "&name=mysql" // TODO: make this config-able
-                + "&databaseServerName=mysql"
+                + "&name={{database.dbname}}"
+                + "&databaseServerName={{database.dbname}}"
                 + "&databaseWhitelist={{database.schema}}"
                 + "&tableWhitelist={{database.schema}}.encounter,{{database.schema}}.obs"
                // + "&offsetStorage=org.apache.kafka.connect.storage.MemoryOffsetBackingStore" // use this for kafka
-                + "&offsetStorageFileName=/tmp/offset.dat" // TODO: make this config-able
-                + "&databaseHistoryFileFilename=/tmp/dbhistory.dat" // TODO: make this config-able
+                + "&offsetStorageFileName={{database.offsetStorage}}"
+                + "&databaseHistoryFileFilename={{database.databaseHistory}}"
             )
                 .routeId(EncObsCDCNotifier.class.getName() + ".DatabaseReader")
                 .log(LoggingLevel.DEBUG, "Incoming message ${body} with headers ${headers}")

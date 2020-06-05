@@ -5,7 +5,7 @@ services:
     restart: always
     ports:
       - "3306:3306"
-    container_name: mysql
+    container_name: dbz-mysql
     environment:
       - MYSQL_DATABASE=openmrs
       - MYSQL_ROOT_PASSWORD=debezium
@@ -27,7 +27,7 @@ services:
       - "8099:8080"
     environment:
       DB_DATABASE: 'openmrs'
-      DB_HOST: mysql
+      DB_HOST: dbz-mysql
       DB_USERNAME: 'mysqluser'
       DB_PASSWORD: 'mysqlpw'
       #DB_CREATE_TABLES: 'true'
@@ -43,4 +43,4 @@ services:
      - openmrs
     environment:
      - JAVA_MAIN_CLASS=org.openmrs.cdc.pipeline.Runner
-     - JAVA_OPTIONS=-Ddatabase.hostname=mysql -Ddatabase.port=3306 -Ddatabase.user=root -Ddatabase.password=debezium -Ddatabase.dbname=mysql -Ddatabase.schema=openmrs
+     - JAVA_OPTIONS=-Ddatabase.hostname=dbz-mysql -Ddatabase.port=3306 -Ddatabase.user=root -Ddatabase.password=debezium -Ddatabase.dbname=mysql -Ddatabase.schema=openmrs -Ddatabase.serverId=77 -Ddatabase.offsetStorage=/tmp/offset.dat -Ddatabase.databaseHistory=/tmp/dbhistory.dat

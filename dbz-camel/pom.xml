@@ -82,12 +82,16 @@
                             <value>${database.schema}</value>
                         </systemProperty>
                         <systemProperty>
-                            <key>smtp.hostname</key>
-                            <value>${smtp.hostname}</value>
+                            <key>database.serverId</key>
+                            <value>${database.serverId}</value>
                         </systemProperty>
                         <systemProperty>
-                            <key>smtp.port</key>
-                            <value>${smtp.port}</value>
+                            <key>database.offsetStorage</key>
+                            <value>${database.offsetStorage}</value>
+                        </systemProperty>
+                        <systemProperty>
+                            <key>database.databaseHistory</key>
+                            <value>${database.databaseHistory}</value>
                         </systemProperty>
                     </systemProperties>
                     <mainClass>org.openmrs.cdc.pipeline.Runner</mainClass>
