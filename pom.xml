@@ -14,10 +14,13 @@
 
         <database.hostname>localhost</database.hostname>
         <database.port>3306</database.port>
-        <database.user>mysqluser</database.user>
-        <database.password>mysqlpw</database.password>
+        <database.user>root</database.user>
+        <database.password>debezium</database.password>
         <database.dbname>mysql</database.dbname>
         <database.schema>openmrs</database.schema>
+        <database.serverId>77</database.serverId>
+        <database.offsetStorage>dbhistory.dat</database.offsetStorage>
+        <database.databaseHistory>offset.dat</database.databaseHistory>
 
         <smtp.hostname>localhost</smtp.hostname>
         <smtp.port>1025</smtp.port>

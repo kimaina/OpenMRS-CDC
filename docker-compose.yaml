@@ -37,10 +37,11 @@ services:
   dbz-camel:
     image: camel-mysql-dbz/dbz-camel:${DEBEZIUM_VERSION}
     container_name: cdc-pipeline
+    network_mode: host
     build:
       context: dbz-camel
     depends_on:
      - openmrs
     environment:
      - JAVA_MAIN_CLASS=org.openmrs.cdc.pipeline.Runner
-     - JAVA_OPTIONS=-Ddatabase.hostname=dbz-mysql -Ddatabase.port=3306 -Ddatabase.user=root -Ddatabase.password=debezium -Ddatabase.dbname=mysql -Ddatabase.schema=openmrs -Ddatabase.serverId=77 -Ddatabase.offsetStorage=/tmp/offset.dat -Ddatabase.databaseHistory=/tmp/dbhistory.dat
+     - JAVA_OPTIONS=-Ddatabase.hostname=localhost -Ddatabase.port=3306 -Ddatabase.user=root -Ddatabase.password=debezium -Ddatabase.dbname=mysql -Ddatabase.schema=openmrs -Ddatabase.serverId=77 -Ddatabase.offsetStorage=/tmp/offset.dat -Ddatabase.databaseHistory=/tmp/dbhistory.dat

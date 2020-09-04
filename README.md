@@ -25,7 +25,9 @@ Build the pipeline and start the docker stack by running:
 ```
 # Terminal One
 $ mvn clean install
-$ docker-compose up --build
+$ docker-compose up --build # or 
+$ mvn exec:java -pl dbz-camel # during dev
+
 ```
 
 Make some updates on the database/OpenMRS, you should be able to view these changes through the logs for the cdc-pipeline container

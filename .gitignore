@@ -30,3 +30,5 @@ dbz-camel/target/
 *.logs
 *.iml
 .eclipse
+/offset.dat
+/dbhistory.dat
